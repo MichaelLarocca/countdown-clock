@@ -1,35 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from 'react';
+import { format, formatDuration, intervalToDuration } from 'date-fns';
+
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const endDate = new Date("August 23, 2023");
+  const [countdown, setCountdown] = useState('');
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = new Date();
+      const timeDifference = endDate - now;
+      const duration = intervalToDuration({ start: now, end: endDate });
+
+      const formattedTime = format(endDate, "MMMM do, yyyy h:mm a");
+      setCountdown(`${formatDuration(duration)} until ${formattedTime}`);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <h2>Countdown Timer</h2>
+      <p>{countdown}</p>
+    </div>
+  );    
 }
 
-export default App
+export default App;
