@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { format, formatDuration, intervalToDuration, isBefore, addDays } from 'date-fns';
+import { format, formatDuration, intervalToDuration, isBefore, addDays, add } from 'date-fns';
 import Confetti from 'react-confetti';
 
 import './App.css'
@@ -27,11 +27,10 @@ function App() {
   }, [endDate]);
 
   const handleDateChange = (event) => {
-    // const chosenDate = new Date(event.target.value);
-    const chosenDate = new Date(event.target.value + 'T00:00:00');
+    const chosenDate = new Date(event.target.value);
     const date = new Date(event.target.value);
-    // date.setDate(date.getDate() + 1);
-    setEndDate(date);
+    const dateEST = add(date, { hours: 3 })
+    setEndDate(dateEST);
     setCountdownEnded(false);
   };
 
@@ -42,7 +41,6 @@ function App() {
       <div className='timer'>
         <h2>Countdown Clock</h2>
         <input type="date" onChange={handleDateChange} />
-        {/* <h3>{format(endDate, "MMMM do, yyyy")}</h3> */}
         <h3>{format(addDays(endDate, 1), "MMMM do, yyyy")}</h3>
         {!countdownEnded && <h4>{countdown}</h4>}
         {countdownEnded && <h4>Countdown Ended!</h4>}
