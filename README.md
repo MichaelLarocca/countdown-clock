@@ -5,7 +5,7 @@ A simple and user-friendly countdown app built using React and the date-fns libr
 ### Built With
 * React
 * date-fns
-* 
+* react-confetti
 
 ### Features
 * Countdown timer with days, hours, minutes, and seconds
