@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { format, formatDuration, intervalToDuration, isBefore, add } from 'date-fns';
+import { format, formatDuration, intervalToDuration, isBefore, addDays, add } from 'date-fns';
 import Confetti from 'react-confetti';
 import './App.css'
 
@@ -8,17 +8,17 @@ function App() {
   const [countdownEnded, setCountdownEnded] = useState(false);
   const [endDate, setEndDate] = useState(() => {
     const initialEndDate = localStorage.getItem("endDate");
-    return initialEndDate ? new Date(Date.parse(initialEndDate)) : new Date("August 23, 2023");
+    return initialEndDate ? new Date(Date.parse(initialEndDate)) : addDays(new Date(), 1);
   });
 
-  const handleDateChange = (event) => {
+  function handleDateChange(event) {
     const chosenDate = new Date(event.target.value);
     const dateEST = add(chosenDate, { hours: 4 });
     localStorage.setItem("endDate", dateEST);
     setEndDate(dateEST);
     setCountdownEnded(false);
   };
-
+  // useEffect hook: Updates the countdown every second and checks if the countdown has ended. If it has, it clears the interval and sets the countdownEnded state to true.
   useEffect(() => {
     const interval = setInterval(() => {
       const now = new Date();
@@ -37,9 +37,9 @@ function App() {
   }, [endDate]);
 
   return (
-    <div className='ctn-timer'>
+    <div className='countdown-timer-container'>
       {countdownEnded && <Confetti />}
-      <img src='https://m.media-amazon.com/images/M/MV5BYzA3ZjQ4YTItNjRhYS00YzRkLTg4NTEtMTYyOGZjNDFmYWM5XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg' width={`300px`}/> 
+      <img src='https://m.media-amazon.com/images/M/MV5BYzA3ZjQ4YTItNjRhYS00YzRkLTg4NTEtMTYyOGZjNDFmYWM5XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg' width={`250`} alt="Countdown clock illustration" /> 
       <div className='timer'>
         <h2>Countdown Clock</h2>
         <input type="date" min={format(new Date(), "yyyy-MM-dd")} onChange={handleDateChange} />

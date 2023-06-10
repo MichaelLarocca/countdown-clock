@@ -1,17 +1,24 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+body {
+  background-color: whitesmoke;
   text-align: center;
   text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
   font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
 }
 
-.ctn-timer {
+.countdown-timer-container {
+  border: 3px solid rgba(0,0,0,0.3);
+  border-radius: 5px;
+  box-shadow: 3px 3px 3px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: white;
 }
 
 .timer {
@@ -29,7 +36,7 @@ img {
 }
 
 @media screen and (min-width: 800px) { 
-  .ctn-timer {
+  .countdown-timer-container {
     flex-direction: row;
   }
 }
