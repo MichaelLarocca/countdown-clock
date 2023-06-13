@@ -1,3 +1,5 @@
+![TN-TXG-92](https://github.com/MichaelLarocca/blog-michael-jude-larocca/blob/main/posts/2023/06-23/img/06-12-2023/TN-TXG-92.png?raw=true)
+
 # countdown-clock
 
 A simple and user-friendly countdown app built using React and the date-fns library. This application allows users to set a target date and displays the remaining time in days, hours, minutes, and seconds. The app also takes timezones into consideration using the date-fns-tz extension.
@@ -32,7 +34,7 @@ This project is licensed under the MIT License
 
 ## Links
 
-- [Article](https://selftaughttxg.com/)
+- [Article](https://selftaughttxg.com/2023/06-23/how-to-make-a-countdown-app-with-react-and-date-fns/)
 - [Live Demo](https://react-countdown-clock.netlify.app/)
 
 ## Author
