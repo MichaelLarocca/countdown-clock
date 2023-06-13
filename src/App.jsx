@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
-import { format, formatDuration, intervalToDuration, isBefore, addDays, add } from 'date-fns';
+import { format, formatDuration, intervalToDuration, isBefore, addDays, add, endOfDay, differenceInMilliseconds } from 'date-fns';
 import Confetti from 'react-confetti';
 import './App.css'
 
 function App() {
+  const now = new Date();
+  const endOfToday = endOfDay(now);
+  const initialEndDate = localStorage.getItem("endDate");
   const [countdown, setCountdown] = useState('');
   const [countdownEnded, setCountdownEnded] = useState(false);
   const [endDate, setEndDate] = useState(() => {
-    const initialEndDate = localStorage.getItem("endDate");
-    return initialEndDate ? new Date(Date.parse(initialEndDate)) : addDays(new Date(), 1);
+    return initialEndDate ? new Date(initialEndDate) : new Date(Date.now() + differenceInMilliseconds(endOfToday, now));
   });
 
   function handleDateChange(event) {
@@ -43,9 +45,10 @@ function App() {
       <div className='timer'>
         <h2>Countdown Clock</h2>
         <input type="date" min={format(new Date(), "yyyy-MM-dd")} onChange={handleDateChange} />
-        <h3>{format(endDate, "MMMM do, yyyy")}</h3>
-        {!countdownEnded && <h4>{countdown}</h4>}
+        {initialEndDate && <h3>{format(endDate, "MMMM do, yyyy")}</h3>}
         {countdownEnded && <h4>Countdown Ended!</h4>}
+        {!initialEndDate && <h3>{format(addDays(endDate, 1), "MMMM do, yyyy")}</h3>}
+        {!countdownEnded && <h4>{countdown}</h4>}
       </div>
     </div>
   );    
