@@ -6,6 +6,8 @@ import './App.css'
 function App() {
   const now = new Date();
   const endOfToday = endOfDay(now);
+  const remainingHours = endOfToday.getHours() - now.getHours();
+  const nextDayAndExtraTime = add(now, { hours: remainingHours + 4, seconds: 1 });
   const initialEndDate = localStorage.getItem("endDate");
   const [countdown, setCountdown] = useState('');
   const [countdownEnded, setCountdownEnded] = useState(false);
@@ -45,7 +47,7 @@ function App() {
       <div className='timer'>
         <h2>Countdown Clock</h2>
         <input type="date" min={format(new Date(), "yyyy-MM-dd")} onChange={handleDateChange} />
-        <h3>{format(endDate, "MMMM do, yyyy")}</h3>
+        <h3>{format(nextDayAndExtraTime, "MMMM do, yyyy")}</h3>
         {countdownEnded && <h4>Countdown Ended!</h4>}
         {!countdownEnded && <h4>{countdown}</h4>}
       </div>
