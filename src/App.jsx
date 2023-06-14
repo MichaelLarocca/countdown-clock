@@ -6,9 +6,9 @@ import './App.css'
 function App() {
   const now = new Date();
   const endOfToday = endOfDay(now);
+  const initialEndDate = localStorage.getItem("endDate");
   const remainingHours = endOfToday.getHours() - now.getHours();
   const nextDayAndExtraTime = add(now, { hours: remainingHours + 4, seconds: 1 });
-  const initialEndDate = localStorage.getItem("endDate");
   const [countdown, setCountdown] = useState('');
   const [countdownEnded, setCountdownEnded] = useState(false);
   const [endDate, setEndDate] = useState(() => {
