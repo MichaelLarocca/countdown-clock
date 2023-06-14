@@ -47,9 +47,10 @@ function App() {
       <div className='timer'>
         <h2>Countdown Clock</h2>
         <input type="date" min={format(new Date(), "yyyy-MM-dd")} onChange={handleDateChange} />
-        <h3>{format(nextDayAndExtraTime, "MMMM do, yyyy")}</h3>
-        {countdownEnded && <h4>Countdown Ended!</h4>}
+        {!initialEndDate && <h3>{format(nextDayAndExtraTime, "MMMM do, yyyy")}</h3>}
+        {initialEndDate && <h3>{format(endDate, "MMMM do, yyyy")}</h3>}
         {!countdownEnded && <h4>{countdown}</h4>}
+        {countdownEnded && <h4>Countdown Ended!</h4>}
       </div>
     </div>
   );    
